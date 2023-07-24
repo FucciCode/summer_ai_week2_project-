@@ -86,12 +86,73 @@ def depthFirstSearch(problem: SearchProblem):
     print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+    visited = []
+    path = []
+    frontier = util.Stack()
+    start = problem.getStartState()
+    frontier.push((start, path, 0))
+    goal_found = False
+    print("While loop: ")
+    
+    while not goal_found:
+        print("____________________________________")
+        print("Frontier: ", frontier)
+        node, path, _ = frontier.pop()
+        print("Node: ", node)
+
+        if(problem.isGoalState(node)):
+            print("Goal state found!")
+            goal_found = True
+            return path
+
+        else:
+            for child, action, _ in (problem.getSuccessors(node)):
+                print("Goal not found...")
+                visited.append(node)
+                if(child not in visited):
+                    frontier.push((child, path+[action], _))
+                    print("Frontier: ", frontier)
+            print("End.")
+            print("____________________________________")
+
+    #util.raiseNotDefined()
+
+
 
 def breadthFirstSearch(problem: SearchProblem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    visited = []
+    path = []
+    frontier = util.Queue()
+    start = problem.getStartState()
+    frontier.push((start, path, 0))
+    goal_found = False
+    print("While loop: ")
+    
+    while not goal_found:
+        print("____________________________________")
+        print("Frontier: ", frontier)
+        node, path, _ = frontier.pop()
+        print("Node: ", node)
+
+        if(problem.isGoalState(node)):
+            print("Goal state found!")
+            goal_found = True
+            return path
+
+        else:
+            for child, action, _ in (problem.getSuccessors(node)):
+                print("Goal not found...")
+                visited.append(node)
+                if(child not in visited):
+                    frontier.push((child, path+[action], _))
+                    print("Frontier: ", frontier)
+            print("End.")
+            print("____________________________________")
+
+    
 
 def uniformCostSearch(problem: SearchProblem):
     """Search the node of least total cost first."""
